@@ -3,13 +3,13 @@
 <display-name>mysqlDate</display-name>
 
 <servlet>
-<servlet-name>MysqlCurrentTimeStampServlet</servlet-name>
-<servlet-class>MysqlCurrentTimeStampServlet</servlet-class>
+<servlet-name>Servlet</servlet-name>
+<servlet-class>Servlet</servlet-class>
 </servlet>
 
 <servlet-mapping>
-<servlet-name>MysqlCurrentTimeStampServlet</servlet-name>
-<url-pattern>/MysqlCurrentTimeStampServlet</url-pattern>
+<servlet-name>Servlet</servlet-name>
+<url-pattern>/Servlet</url-pattern>
 </servlet-mapping>
 
 </web-app>
