@@ -1,0 +1,57 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class Servlet extends HttpServlet
+{
+public void doGet(HttpServletRequest req, HttpServletResponse res)
+        throws IOException, ServletException
+        {
+                res.setContentType("text/html");
+                PrintWriter pw = res.getWriter();
+                String driver = "com.mysql.jdbc.Driver";
+                String url = "jdbc:mysql://192.168.10.13/data";
+                String user = "root";
+                String password = "root";
+                String sql = "select current_timestamp";
+                Connection con;
+                PreparedStatement ps;
+                ResultSet rs;
+                try
+                {
+                        Class.forName(driver);
+                        con = DriverManager.getConnection(url,user,password);
+                        ps = con.prepareStatement(sql);
+                        rs = ps.executeQuery();
+                        
+                        pw.println("<table><tr>");
+                        pw.println("<td><b>current_timestamp</b></td>");
+                        pw.println("</tr>");
+                        
+                        while(rs.next())
+                        {
+                                String timeStamp = rs.getString(1);
+                                pw.println("<tr>");
+                                pw.println("<td>"+timeStamp+"</td>");
+                                pw.println("</tr>");
+                        }
+                        pw.println("</table>");
+                }
+                catch(SQLException sx)
+                {
+                        pw.println(sx);
+                }
+                catch(ClassNotFoundException cx)
+                {
+                        pw.println(cx);
+                }
+        }
+}
